@@ -10,6 +10,7 @@ class TruckForm extends Form
     {
         $this
             ->add('truckmaker_id', 'select', [
+                'label' => 'Truck',
                 'choices' => ['4' => 'GAZ', '3' => 'Mercedes', '2' => 'VAZ', '1' => 'Volvo'],
                 'empty_value' => 'Select a truck maker',
                 'rules' => 'required',
