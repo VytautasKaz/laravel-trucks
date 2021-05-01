@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Forms\TruckForm;
 use App\Models\Truck;
+use App\Models\Truckmaker;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 
@@ -14,10 +15,14 @@ class TruckController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $trucks = Truck::orderBy('year')->get();
-        return view('trucks.index', ['trucks' => $trucks]);
+        if (isset($request->truckmaker_id) && $request->truckmaker_id !== 0)
+            $trucks = Truck::where('truckmaker_id', $request->truckmaker_id)->orderBy('year')->get();
+        else
+            $trucks = Truck::orderBy('year')->get();
+
+        return view('trucks.index', ['trucks' => $trucks, 'truckmakers' => Truckmaker::orderBy('name')->get()]);
     }
 
     /**
