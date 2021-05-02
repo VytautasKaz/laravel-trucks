@@ -18,7 +18,7 @@ Login needed to access create/delete features.
 -   Run **php artisan serve**
 -   Follow the link that appears in the terminal after running 'php artisan serve'.
 
-## Test login detais:
+## Test login details:
 
 E-mail: admin@admin.com
 Password: 123456789
