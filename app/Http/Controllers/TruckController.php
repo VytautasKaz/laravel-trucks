@@ -54,6 +54,11 @@ class TruckController extends Controller
             'name' => 'required'
         ]);
 
+        $nameValidation = explode(' ', $request->name);
+        if (count($nameValidation) < 2) {
+            return redirect()->back()->with('status_error', 'Full owner name required.');
+        }
+
         $truck = new Truck();
         $truck->fill($request->all());
         $truck->save();
