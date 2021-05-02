@@ -19,9 +19,12 @@ class TruckForm extends Form
                 'rules' => 'required'
             ])
             ->add('name', 'text', [
-                'rules' => 'required'
+                'rules' => 'required',
+                'label' => 'Full Owner Name'
             ])
-            ->add('owners_count', 'number')
+            ->add('owners_count', 'number', [
+                'label' => 'Number Of Owners'
+            ])
             ->add('comments', 'textarea')
             ->add('submit', 'submit');
     }
