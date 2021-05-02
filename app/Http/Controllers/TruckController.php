@@ -18,9 +18,9 @@ class TruckController extends Controller
     public function index(Request $request)
     {
         if (isset($request->truckmaker_id) && $request->truckmaker_id !== 0)
-            $trucks = Truck::where('truckmaker_id', $request->truckmaker_id)->sortable()->paginate(5);
+            $trucks = Truck::where('truckmaker_id', $request->truckmaker_id)->sortable()->paginate(999);
         else
-            $trucks = Truck::sortable()->paginate(5);
+            $trucks = Truck::sortable()->paginate(999);
 
         return view('trucks.index', compact('trucks'), ['trucks' => $trucks, 'truckmakers' => Truckmaker::orderBy('name')->get()]);
     }
@@ -51,7 +51,8 @@ class TruckController extends Controller
         $this->validate($request, [
             'truckmaker_id' => 'required',
             'year' => 'required|gte:1900|lte:' . $year,
-            'name' => 'required'
+            'name' => 'required',
+            'owners_count' => 'nullable|gte:1'
         ]);
 
         $nameValidation = explode(' ', $request->name);
