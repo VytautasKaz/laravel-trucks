@@ -15,19 +15,19 @@ class TruckmakerSeeder extends Seeder
     public function run()
     {
         $truckMaker = new Truckmaker();
-        $truckMaker->truck_name = "Volvo";
+        $truckMaker->truck_name = "GAZ";
         $truckMaker->save();
 
         $truckMaker1 = new TruckMaker();
-        $truckMaker1->truck_name = "VAZ";
+        $truckMaker1->truck_name = "Mercedes";
         $truckMaker1->save();
 
         $truckMaker2 = new TruckMaker();
-        $truckMaker2->truck_name = "Mercedes";
+        $truckMaker2->truck_name = "VAZ";
         $truckMaker2->save();
 
         $truckMaker3 = new TruckMaker();
-        $truckMaker3->truck_name = "GAZ";
+        $truckMaker3->truck_name = "Volvo";
         $truckMaker3->save();
     }
 }
