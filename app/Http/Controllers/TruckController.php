@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Forms\TruckForm;
 use App\Models\Truck;
 use App\Models\Truckmaker;
+use App\Rules\TwoWords;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 
@@ -22,7 +23,7 @@ class TruckController extends Controller
         else
             $trucks = Truck::sortable()->paginate(999);
 
-        return view('trucks.index', compact('trucks'), ['trucks' => $trucks, 'truckmakers' => Truckmaker::orderBy('name')->get()]);
+        return view('trucks.index', ['trucks' => $trucks, 'truckmakers' => Truckmaker::orderBy('name')->get()]);
     }
 
     /**
@@ -51,14 +52,9 @@ class TruckController extends Controller
         $this->validate($request, [
             'truckmaker_id' => 'required',
             'year' => 'required|gte:1900|lte:' . $year,
-            'name' => 'required',
+            'name' => ['required', new TwoWords],
             'owners_count' => 'nullable|gte:1'
         ]);
-
-        $nameValidation = explode(' ', $request->name);
-        if (count($nameValidation) < 2) {
-            return redirect()->back()->with('status_error', 'Full owner name required.');
-        }
 
         $truck = new Truck();
         $truck->fill($request->all());
