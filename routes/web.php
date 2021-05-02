@@ -25,6 +25,7 @@ Auth::routes(['register' => false]);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/trucks/create', [TruckController::class, 'create'])->name('trucks.create');
+    Route::post('/trucks', [TruckController::class, 'store'])->name('trucks.store');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
