@@ -21,7 +21,7 @@
         @endif
         <table class="table">
             <tr>
-                <th>@sortablelink('truckmaker_id', 'Maker')</th>
+                <th>@sortablelink('truckmaker_id', 'Truck Name')</th>
                 <th>@sortablelink('year')</th>
                 <th>@sortablelink('name', 'Owner')</th>
                 <th style="text-align: center">@sortablelink('owners_count', 'Number Of Owners')</th>
