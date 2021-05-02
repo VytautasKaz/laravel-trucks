@@ -23,6 +23,10 @@ Route::resource('trucks', TruckController::class);
 
 Auth::routes(['register' => false]);
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/trucks/create', [TruckController::class, 'create'])->name('trucks.create');
+});
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::any('/{any}', function () {
