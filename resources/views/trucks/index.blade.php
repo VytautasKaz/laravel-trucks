@@ -26,7 +26,9 @@
                 <th>@sortablelink('name', 'Owner')</th>
                 <th style="text-align: center">@sortablelink('owners_count', 'Number Of Owners')</th>
                 <th>Comment</th>
-                <th>Actions</th>
+                @if (auth()->check())
+                    <th>Actions</th>
+                @endif
             </tr>
             @foreach ($trucks as $truck)
                 <tr>
@@ -35,18 +37,22 @@
                     <td>{{ $truck->name }}</td>
                     <td style="text-align: center">{{ $truck->owners_count }}</td>
                     <td>{{ $truck->comments }}</td>
-                    <td>
-                        <form action="{{ route('trucks.destroy', $truck->id) }}" method="POST">
-                            @csrf @method('delete')
-                            <input type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')"
-                                value="Delete" />
-                        </form>
-                    </td>
+                    @if (auth()->check())
+                        <td>
+                            <form action="{{ route('trucks.destroy', $truck->id) }}" method="POST">
+                                @csrf @method('delete')
+                                <input type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')"
+                                    value="Delete" />
+                            </form>
+                        </td>
+                    @endif
                 </tr>
             @endforeach
         </table>
-        <div>
-            <a href="{{ route('trucks.create') }}" class="btn btn-success">Add</a>
-        </div>
+        @if (auth()->check())
+            <div>
+                <a href="{{ route('trucks.create') }}" class="btn btn-success">Add</a>
+            </div>
+        @endif
     </div>
 @endsection
