@@ -21,11 +21,11 @@
         @endif
         <table class="table">
             <tr>
-                <th>Maker</th>
-                <th>Year</th>
-                <th>Owner</th>
-                <th style="text-align: center">Number of owners</th>
-                <th>Comments</th>
+                <th>@sortablelink('truckmaker_id', 'Maker')</th>
+                <th>@sortablelink('year')</th>
+                <th>@sortablelink('name', 'Owner')</th>
+                <th style="text-align: center">@sortablelink('owners_count', 'Number Of Owners')</th>
+                <th>Comment</th>
                 <th>Actions</th>
             </tr>
             @foreach ($trucks as $truck)

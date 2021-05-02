@@ -18,11 +18,11 @@ class TruckController extends Controller
     public function index(Request $request)
     {
         if (isset($request->truckmaker_id) && $request->truckmaker_id !== 0)
-            $trucks = Truck::where('truckmaker_id', $request->truckmaker_id)->orderBy('year')->get();
+            $trucks = Truck::where('truckmaker_id', $request->truckmaker_id)->sortable()->paginate(5);
         else
-            $trucks = Truck::orderBy('year')->get();
+            $trucks = Truck::sortable()->paginate(5);
 
-        return view('trucks.index', ['trucks' => $trucks, 'truckmakers' => Truckmaker::orderBy('name')->get()]);
+        return view('trucks.index', compact('trucks'), ['trucks' => $trucks, 'truckmakers' => Truckmaker::orderBy('name')->get()]);
     }
 
     /**
