@@ -8,6 +8,7 @@ use App\Models\Truckmaker;
 use App\Rules\TwoWords;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
+use Illuminate\Support\Facades\DB;
 
 class TruckController extends Controller
 {
@@ -18,12 +19,16 @@ class TruckController extends Controller
      */
     public function index(Request $request)
     {
+        // $joined = DB::table('trucks')
+        //     ->leftJoin('truckmakers', 'truckmaker_id', '=', 'truckmakers.id')->get();
+        // dd($joined);
+
         if (isset($request->truckmaker_id) && $request->truckmaker_id !== 0)
             $trucks = Truck::where('truckmaker_id', $request->truckmaker_id)->sortable()->paginate(999);
         else
             $trucks = Truck::sortable()->paginate(999);
 
-        return view('trucks.index', ['trucks' => $trucks, 'truckmakers' => Truckmaker::orderBy('name')->get()]);
+        return view('trucks.index', ['trucks' => $trucks, 'truckmakers' => Truckmaker::orderBy('truck_name')->get()]);
     }
 
     /**

@@ -15,7 +15,7 @@ class CreateTruckmakersTable extends Migration
     {
         Schema::create('truckmakers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('truck_name');
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@
                 <select style="margin-right: 20px;" name="truckmaker_id" id="" class="form-control">
                     <option value="" selected disabled>Choose a truck to filter by</option>
                     @foreach ($truckmakers as $truckmaker)
-                        <option value="{{ $truckmaker->id }}" @if ($truckmaker->id == app('request')->input('truckmaker_id')) selected="selected" @endif>{{ $truckmaker->name }}
+                        <option value="{{ $truckmaker->id }}" @if ($truckmaker->id == app('request')->input('truckmaker_id')) selected="selected" @endif>{{ $truckmaker->truck_name }}
                         </option>
                     @endforeach
                 </select>
@@ -30,7 +30,7 @@
             </tr>
             @foreach ($trucks as $truck)
                 <tr>
-                    <td>{{ $truck->truckmaker['name'] }}</td>
+                    <td>{{ $truck->truckmaker['truck_name'] }}</td>
                     <td>{{ $truck->year }}</td>
                     <td>{{ $truck->name }}</td>
                     <td style="text-align: center">{{ $truck->owners_count }}</td>
